@@ -9,7 +9,7 @@ module Ahnsay
     # Basic configuration for the plugin
     #
     config :ahnsay do
-      greeting "Hello", :desc => "What to use to greet users"
+      sounds_dir "sounds", :desc => "Name for the application directory that holds the bundled sounds"
     end
 
     # Defining a Rake task is easy
