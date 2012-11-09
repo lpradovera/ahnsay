@@ -18,7 +18,7 @@ module Ahnsay
     #
     tasks do
       namespace :ahnsay do
-        desc "Prints the PluginTemplate information"
+        desc "Prints the Ahnsay information"
         task :info do
           STDOUT.puts "Ahnsay plugin v. #{VERSION}"
         end
