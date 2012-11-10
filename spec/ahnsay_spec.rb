@@ -36,7 +36,106 @@ describe Ahnsay do
       it "returns the expected array for a number with tens below 20" do
         subject.files_for_number(13).should == ["sounds/13.ul"]
       end
+      it "returns the expected array for a number that is a multiple of 10" do
+        subject.files_for_number(20).should == ["sounds/20.ul"]
+      end
     end
+
+    describe "#parse_hour_12h" do
+      let(:am) { Time.new(2012, 11, 10, 4) }
+      let(:pm) { Time.new(2012, 11, 10, 16) }
+      let(:midnight) { Time.new(2012, 11, 10, 0) }
+
+      it "returns the correct hour in 12hr format for an AM time" do
+        subject.parse_hour_12h(am).should == ["sounds/4.ul"]
+      end
+
+      it "returns the correct hour in 12hr format for a PM time" do
+        subject.parse_hour_12h(pm).should == ["sounds/4.ul"]
+      end
+
+      it "returns the correct hour in 12hr format for midnight" do
+        subject.parse_hour_12h(midnight).should == ["sounds/12.ul"]
+      end
+    end
+
+    describe "#parse_hour_24h" do
+      let(:am) { Time.new(2012, 11, 10, 4) }
+      let(:pm) { Time.new(2012, 11, 10, 16) }
+      let(:midnight) { Time.new(2012, 11, 10, 0) }
+
+      it "returns the correct hour in 24hr format for an AM time" do
+        subject.parse_hour_24h(am).should == ["sounds/4.ul"]
+      end
+
+      it "returns the correct hour in 24hr format for a PM time" do
+        subject.parse_hour_24h(pm).should == ["sounds/16.ul"]
+      end
+
+      it "returns the correct hour in 24hr format for midnight" do
+        subject.parse_hour_24h(midnight).should == ["sounds/0.ul"]
+      end
+    end
+
+    describe "#parse_minutes" do
+      let(:time) { Time.new(2012, 11, 10, 4, 15) }
+      let(:oclock) { Time.new(2012, 11, 10, 4, 0) }
+      it "returns the correct files for the minute" do
+        subject.parse_minutes(time).should == ["sounds/15.ul"]
+      end
+      
+      it "returns o' clock when the minute is 0" do
+        subject.parse_minutes(oclock).should == ["sounds/oclock.ul"]
+      end
+    end
+
+    describe "#parse_seconds" do
+      let(:time) { Time.new(2012, 11, 10, 4, 15, 15) }
+      it "returns the correct files for the seconds" do
+        subject.parse_seconds(time).should == ["sounds/15.ul"]
+      end
+    end
+
+    describe "#parse_am_pm" do
+      let(:am) { Time.new(2012, 11, 10, 4) }
+      let(:pm) { Time.new(2012, 11, 10, 16) }
+      it "returns the correct sound file for an AM time" do
+        subject.parse_am_pm(am).should == ["sounds/a-m.ul"]
+      end
+
+      it "returns the correct sound file for a PM time" do
+        subject.parse_am_pm(pm).should == ["sounds/p-m.ul"]
+      end
+    end
+
+    describe "#parse_at" do
+      let(:time) { Time.new(2012, 11, 10, 4, 15, 15) }
+      it "returns the correct files for the at word" do
+        subject.parse_at(time).should == ["sounds/at.ul"]
+      end
+    end
+
+    describe "#parse_year" do
+      let(:time) { Time.new(2012, 11, 10, 4, 15, 15) }
+      it "returns the correct files for the year" do
+        subject.parse_year(time).should == ["sounds/20.ul", "sounds/12.ul"]
+      end
+    end
+
+    describe "#parse_month" do
+      let(:time) { Time.new(2012, 11, 10, 4) }
+      it "returns the correct file for the month" do
+        subject.parse_month(time).should == ["sounds/mon-10.ul"]
+      end
+    end
+
+    describe "#parse_day" do
+      let(:time) { Time.new(2012, 11, 20, 4) }
+      it "returns the correct file for the day" do
+        subject.parse_day(time).should == ["sounds/20.ul"]
+      end
+    end
+
   end
 
   context "path manipulation methods" do

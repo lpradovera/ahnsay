@@ -4,6 +4,81 @@ require "ahnsay/controller_methods"
 
 module Ahnsay
   class << self
+
+    ##
+    # Parses an "h" character from the main methods
+    # Returns the time in AM time.
+    # 
+    def parse_hour_12h(time)
+      files_for_number(time.strftime("%l"))
+    end
+
+    ##
+    # Parses an "H" character from the main methods
+    # Returns the time in 24 time.
+    # 
+    def parse_hour_24h(time)
+      files_for_number(time.strftime("%k"))
+    end
+
+    ##
+    # Parses a "Y" character from the main methods
+    # Returns the numbers for the year in 4 digit format
+    # 
+    def parse_year(time)
+      year = time.strftime("%Y").to_i
+      files_for_number(year / 100) + files_for_number(year % 100)
+    end
+
+    ##
+    # Parses an "M" character from the main methods
+    # Returns the month in an array.
+    # 
+    def parse_month(time)
+      [file_for_month(time.strftime("%-m"))]
+    end
+
+    ##
+    # Parses a "d" character from the main methods
+    # Returns the numbers for the day.
+    # 
+    def parse_day(time)
+      files_for_number(time.strftime("%-d"))
+    end
+
+    ##
+    # Parses a "m" character from the main methods
+    # Returns the numbers for the minutes
+    # 
+    def parse_minutes(time)
+      minutes = time.strftime("%M").to_i
+      minutes == 0 ? [sound_path("oclock.ul")] : files_for_number(minutes)
+    end
+
+    ##
+    # Parses a "s" character from the main methods
+    # Returns the numbers for the seconds
+    # 
+    def parse_seconds(time)
+      files_for_number(time.strftime("%S"))
+    end
+
+    ##
+    # Parses a "p" character
+    # Returns AM or PM sound files
+    #
+    def parse_am_pm(time)
+      time.strftime("%P") == "am" ? [sound_path("a-m.ul")] : [sound_path("p-m.ul")]
+    end
+
+    ##
+    # Parses a "a" character
+    # Returns a "at" connection
+    #
+    def parse_at(time)
+      [sound_path("at.ul")]
+    end
+
     ##
     # Expects days from 0 to 6 where 0 is Sunday and 6 is Monday
     #
@@ -28,23 +103,21 @@ module Ahnsay
       result = []
       thousands = (number / 1000).floor
       if thousands > 0
-        result << ("#{thousands}.ul")
-        result << ("thousand.ul")
+        result << "#{thousands}.ul" << "thousand.ul"
       end
       rest = number % 1000
       hundreds = (rest / 100).floor
       if hundreds > 0
-        result << ("#{hundreds}.ul")
-        result << ("hundred.ul")
+        result << "#{hundreds}.ul" << "hundred.ul"
       end
       rest = rest % 100
       if rest < 19
-        result << ("#{rest}.ul")
+        result << "#{rest}.ul"
       else
         tens = (rest / 10).floor
         units = rest % 10
-        result << ("#{tens}0.ul")
-        result << ("#{units}.ul")
+        result << "#{tens}0.ul" 
+        result << "#{units}.ul" if units > 0
       end
       result.map {|r| sound_path(r) }
     end
@@ -53,7 +126,7 @@ module Ahnsay
     # Gets the path for a sound file based on configuration and platform
     #
     def sound_path(name)
-      Ahnsay.multi_path(File.join(Adhearsion.config.ahnsay.sounds_dir, name))
+      multi_path(File.join(Adhearsion.config.ahnsay.sounds_dir, name))
     end
 
     ##
