@@ -9,7 +9,7 @@ module Ahnsay
     # Basic configuration for the plugin
     #
     config :ahnsay do
-      sounds_dir "sounds", :desc => "Name for the application directory that holds the bundled sounds"
+      sounds_dir File.expand_path('../../../sounds', __FILE__), :desc => "Name for the application directory that holds the bundled sounds"
     end
 
     # Defining a Rake task is easy
