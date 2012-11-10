@@ -2,6 +2,31 @@ require 'spec_helper'
 
 describe Ahnsay do
   subject { Ahnsay }
+
+  describe "sounds_for_time" do
+    before :each do
+      Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+      Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
+    end
+    let(:time) { Time.new(2012, 11, 10, 4, 15, 22) }
+    it "calls the correct methods" do
+      subject.should_receive(:parse_day).ordered.once.and_return([])
+      subject.should_receive(:parse_month).ordered.once.and_return([])
+      subject.should_receive(:parse_year).ordered.once.and_return([])
+      subject.sounds_for_time(time, format: 'dMY')
+    end
+
+    it "returns the correct sounds for the default format" do
+      subject.sounds_for_time(time).should == ["sounds/10.ul", "sounds/mon-10.ul", "sounds/20.ul", "sounds/12.ul", "sounds/at.ul", "sounds/4.ul", "sounds/15.ul"]
+    end
+
+    it "returns the correct sounds for a dMY format" do
+      subject.sounds_for_time(time, format: 'dMY').should == ["sounds/10.ul", "sounds/mon-10.ul", "sounds/20.ul", "sounds/12.ul"]
+    end
+    it "returns the correct sounds for a hmp format" do
+      subject.sounds_for_time(time, format: 'hmp').should == ["sounds/4.ul", "sounds/15.ul", "sounds/a-m.ul"]
+    end
+  end
   
   context "TTS support methods" do
     before :each do
@@ -133,6 +158,13 @@ describe Ahnsay do
       let(:time) { Time.new(2012, 11, 20, 4) }
       it "returns the correct file for the day" do
         subject.parse_day(time).should == ["sounds/20.ul"]
+      end
+    end
+
+    describe "#parse_weekday" do
+      let(:time) { Time.new(2012, 11, 11, 4) }
+      it "returns the correct file for the day" do
+        subject.parse_weekday(time).should == ["sounds/day-0.ul"]
       end
     end
 

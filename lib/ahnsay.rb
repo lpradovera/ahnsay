@@ -4,6 +4,45 @@ require "ahnsay/controller_methods"
 
 module Ahnsay
   class << self
+    FORMAT_TABLE = {
+      "h" => "hour_12h",
+      "H" => "hour_24h",
+      "m" => "minutes",
+      "s" => "seconds",
+      "d" => "day",
+      "w" => "weekday",
+      "M" => "month",
+      "Y" => "year",
+      "p" => "am_pm",
+      "a" => "at"
+    }
+
+    ##
+    # Main entry point
+    # Requires a Time object and a parameter Hash, currently :format
+    # Returns an array of sound files with the requested output
+    # Example: sound_files_for_time(Time.now, format: "dMYaHm"
+    # 
+    # format:
+    #   h: 12h hour
+    #   H: 24h hour
+    #   m: minutes
+    #   s: seconds
+    #   d: day in number
+    #   w: weekday name
+    #   M: month name
+    #   Y: year as "twenty twelve"
+    #   p: AM or PM indicator
+    #   a: the "at" word
+    #   
+    def sounds_for_time(time, args={})
+      format = args.delete(:format) || 'dMYaHm'
+      result = []
+      format.each_char do |c|
+        result += send("parse_#{FORMAT_TABLE[c]}".to_sym, time)
+      end
+      result
+    end
 
     ##
     # Parses an "h" character from the main methods
@@ -44,6 +83,14 @@ module Ahnsay
     # 
     def parse_day(time)
       files_for_number(time.strftime("%-d"))
+    end
+
+    ##
+    # Parses a "w" character from the main methods
+    # Returns the weekday sound.
+    # 
+    def parse_weekday(time)
+      [file_for_day(time.strftime("%w"))]
     end
 
     ##
