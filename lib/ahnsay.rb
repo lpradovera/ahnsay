@@ -49,7 +49,7 @@ module Ahnsay
     # Returns the time in AM time.
     # 
     def parse_hour_12h(time)
-      files_for_number(time.strftime("%l"))
+      sounds_for_number(time.strftime("%l"))
     end
 
     ##
@@ -57,7 +57,7 @@ module Ahnsay
     # Returns the time in 24 time.
     # 
     def parse_hour_24h(time)
-      files_for_number(time.strftime("%k"))
+      sounds_for_number(time.strftime("%k"))
     end
 
     ##
@@ -66,7 +66,7 @@ module Ahnsay
     # 
     def parse_year(time)
       year = time.strftime("%Y").to_i
-      files_for_number(year / 100) + files_for_number(year % 100)
+      sounds_for_number(year / 100) + sounds_for_number(year % 100)
     end
 
     ##
@@ -82,7 +82,7 @@ module Ahnsay
     # Returns the numbers for the day.
     # 
     def parse_day(time)
-      files_for_number(time.strftime("%-d"))
+      sounds_for_number(time.strftime("%-d"))
     end
 
     ##
@@ -99,7 +99,7 @@ module Ahnsay
     # 
     def parse_minutes(time)
       minutes = time.strftime("%M").to_i
-      minutes == 0 ? [sound_path("oclock.ul")] : files_for_number(minutes)
+      minutes == 0 ? [sound_path("oclock.ul")] : sounds_for_number(minutes)
     end
 
     ##
@@ -107,7 +107,7 @@ module Ahnsay
     # Returns the numbers for the seconds
     # 
     def parse_seconds(time)
-      files_for_number(time.strftime("%S"))
+      sounds_for_number(time.strftime("%S"))
     end
 
     ##
@@ -145,7 +145,7 @@ module Ahnsay
     # Breaks a number down into components.
     # Supports numbers up to 9999
     #
-    def files_for_number(number)
+    def sounds_for_number(number)
       number = number.to_i
       result = []
       thousands = (number / 1000).floor

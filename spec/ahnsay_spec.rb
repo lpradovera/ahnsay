@@ -45,24 +45,24 @@ describe Ahnsay do
       end 
     end
 
-    describe "#files_for_number" do
+    describe "#sounds_for_number" do
       it "returns the expected array for a number with thousands and tens above 20" do
-        subject.files_for_number(2023).should == ["sounds/2.ul", "sounds/thousand.ul", "sounds/20.ul", "sounds/3.ul"]
+        subject.sounds_for_number(2023).should == ["sounds/2.ul", "sounds/thousand.ul", "sounds/20.ul", "sounds/3.ul"]
       end
       it "returns the expected array for a number with thousands and tens below 20" do
-        subject.files_for_number(2013).should == ["sounds/2.ul", "sounds/thousand.ul", "sounds/13.ul"]
+        subject.sounds_for_number(2013).should == ["sounds/2.ul", "sounds/thousand.ul", "sounds/13.ul"]
       end
       it "returns the expected array for a number with hundreds" do
-        subject.files_for_number(123).should == ["sounds/1.ul", "sounds/hundred.ul", "sounds/20.ul", "sounds/3.ul"]
+        subject.sounds_for_number(123).should == ["sounds/1.ul", "sounds/hundred.ul", "sounds/20.ul", "sounds/3.ul"]
       end
       it "returns the expected array for a number with tens above 20" do
-        subject.files_for_number(23).should == ["sounds/20.ul", "sounds/3.ul"]
+        subject.sounds_for_number(23).should == ["sounds/20.ul", "sounds/3.ul"]
       end
       it "returns the expected array for a number with tens below 20" do
-        subject.files_for_number(13).should == ["sounds/13.ul"]
+        subject.sounds_for_number(13).should == ["sounds/13.ul"]
       end
       it "returns the expected array for a number that is a multiple of 10" do
-        subject.files_for_number(20).should == ["sounds/20.ul"]
+        subject.sounds_for_number(20).should == ["sounds/20.ul"]
       end
     end
 
