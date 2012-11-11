@@ -4,6 +4,7 @@ module Ahnsay
     #
     init :ahnsay do
       logger.warn "Ahnsay has been loaded"
+      ::Adhearsion::CallController.mixin ::Ahnsay::ControllerMethods
     end
 
     # Basic configuration for the plugin
