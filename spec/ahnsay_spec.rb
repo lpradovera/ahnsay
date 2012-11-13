@@ -27,6 +27,18 @@ describe Ahnsay do
       subject.sounds_for_time(time, format: 'hmp').should == ["sounds/4.ul", "sounds/15.ul", "sounds/a-m.ul"]
     end
   end
+
+  describe "sounds_for_digits" do
+    before :each do
+      Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+      Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
+    end
+    let(:number) { "4041" }
+    
+    it "returns the single digits for the number" do
+      subject.sounds_for_digits(number).should == ["sounds/4.ul", "sounds/0.ul", "sounds/4.ul", "sounds/1.ul"]
+    end
+  end
   
   context "TTS support methods" do
     before :each do

@@ -45,6 +45,17 @@ module Ahnsay
     end
 
     ##
+    # Returns the sounds for the single digits composing a number
+    #
+    def sounds_for_digits(num)
+      result = []
+      num.to_s.each_char do |c|
+        result << sound_path("#{c}.ul")
+      end
+      result
+    end
+
+    ##
     # Parses an "h" character from the main methods
     # Returns the time in AM time.
     # 
