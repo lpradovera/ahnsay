@@ -4,12 +4,13 @@ module Ahnsay
     #
     init :ahnsay do
       logger.warn "Ahnsay has been loaded"
+      ::Adhearsion::CallController.mixin ::Ahnsay::ControllerMethods
     end
 
     # Basic configuration for the plugin
     #
     config :ahnsay do
-      greeting "Hello", :desc => "What to use to greet users"
+      sounds_dir File.expand_path('../../../sounds', __FILE__), :desc => "Name for the application directory that holds the bundled sounds"
     end
 
     # Defining a Rake task is easy
@@ -18,7 +19,7 @@ module Ahnsay
     #
     tasks do
       namespace :ahnsay do
-        desc "Prints the PluginTemplate information"
+        desc "Prints the Ahnsay information"
         task :info do
           STDOUT.puts "Ahnsay plugin v. #{VERSION}"
         end

@@ -1,10 +1,15 @@
 module Ahnsay
   module ControllerMethods
-    # The methods are defined in a normal method the user will then mix in their CallControllers
-    # The following also contains an example of configuration usage
-    #
-    def greet(name)
-      play "#{Adhearsion.config[:ahnsay].greeting}, #{name}"
+    def sounds_for_time(time, args)
+      Ahnsay.sounds_for_time(time, args)
+    end
+
+    def sounds_for_number(number)
+      Ahnsay.sounds_for_number(number)
+    end
+
+    def sounds_for_digits(number)
+      Ahnsay.sounds_for_digits(number)
     end
   end
 end
