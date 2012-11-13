@@ -34,6 +34,12 @@ module Ahnsay
         end
       end
 
+      describe "#sounds_for_digits" do
+        it "calls Ahnsay#sounds_for_digits and returns the proper value" do
+          subject.sounds_for_digits(number).should == ["sounds/4.ul", "sounds/2.ul"]
+        end
+      end
+
     end
   end
 end
