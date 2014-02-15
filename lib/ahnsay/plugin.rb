@@ -3,7 +3,7 @@ module Ahnsay
     # Actions to perform when the plugin is loaded
     #
     init :ahnsay do
-      logger.warn "Ahnsay has been loaded"
+      logger.info "Ahnsay has been loaded"
       ::Adhearsion::CallController.mixin ::Ahnsay::ControllerMethods
     end
 
