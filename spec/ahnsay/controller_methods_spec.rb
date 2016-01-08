@@ -18,7 +18,7 @@ module Ahnsay
       end
 
       before :each do
-        Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+        Adhearsion.stub_chain("config.core.type").and_return(:foo)
         Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
       end
 

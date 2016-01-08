@@ -191,8 +191,8 @@ module Ahnsay
     # Massages the file path depending on platform
     #
     def multi_path(path)
-      path = path.chomp(File.extname(path)) if Adhearsion.config.punchblock.platform == :asterisk
-      path = "file://" + path if Adhearsion.config.punchblock.platform == :xmpp
+      path = path.chomp(File.extname(path)) if Adhearsion.config.core.type == :asterisk
+      path = "file://" + path if Adhearsion.config.core.type == :xmpp
       path
     end
   end
