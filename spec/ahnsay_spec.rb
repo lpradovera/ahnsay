@@ -71,7 +71,7 @@ describe Ahnsay do
         subject.sounds_for_number(23).should == ["sounds/20.ul", "sounds/3.ul"]
       end
       it "returns the expected array for a number with tens below 20" do
-        subject.sounds_for_number(13).should == ["sounds/13.ul"]
+        subject.sounds_for_number(19).should == ["sounds/19.ul"]
       end
       it "returns the expected array for a number that is a multiple of 10" do
         subject.sounds_for_number(20).should == ["sounds/20.ul"]

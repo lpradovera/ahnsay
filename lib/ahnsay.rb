@@ -169,7 +169,7 @@ module Ahnsay
         result << "#{hundreds}.ul" << "hundred.ul"
       end
       rest = rest % 100
-      if rest < 19
+      if rest < 20
         result << "#{rest}.ul"
       else
         tens = (rest / 10).floor
