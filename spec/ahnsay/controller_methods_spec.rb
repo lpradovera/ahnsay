@@ -10,6 +10,7 @@ module Ahnsay
 
       let(:mock_call) { mock 'Call' }
       let(:time) { Time.new(2012, 11, 10, 4, 15, 15) }
+      let(:time19) { Time.new(2019, 11, 19, 4, 15, 15) }
       let(:format) { 'dMY' }
       let(:number) { 42 }
 
@@ -25,6 +26,10 @@ module Ahnsay
       describe "#sounds_for_time" do
         it "calls Ahnsay#sounds_for_time and returns the proper value" do
           subject.sounds_for_time(time, format: format).should == ["sounds/10.ul", "sounds/mon-10.ul", "sounds/20.ul", "sounds/12.ul"]
+        end
+
+        it "calls Ahnsay#sounds_for_time and returns the proper value with a 19" do
+          subject.sounds_for_time(time19, format: format).should == ["sounds/19.ul", "sounds/mon-10.ul", "sounds/20.ul", "sounds/19.ul"]
         end
       end
 
