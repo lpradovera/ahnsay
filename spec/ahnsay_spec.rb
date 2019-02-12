@@ -9,7 +9,7 @@ describe Ahnsay do
       Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
     end
     let(:time) { Time.new(2012, 11, 10, 4, 15, 22) }
-    let(:time19) { Time.new(2019, 11, 19, 4, 19, 22) }
+    let(:time19) { Time.new(2019, 11, 19, 5, 19, 22) }
     it "calls the correct methods" do
       subject.should_receive(:parse_day).ordered.once.and_return([])
       subject.should_receive(:parse_month).ordered.once.and_return([])
@@ -22,7 +22,7 @@ describe Ahnsay do
     end
 
     it "returns the correct sounds for the default format using 19" do
-      subject.sounds_for_time(time19).should == ["sounds/19.ul", "sounds/mon-10.ul", "sounds/20.ul", "sounds/19.ul", "sounds/at.ul", "sounds/4.ul", "sounds/19.ul"]
+      subject.sounds_for_time(time19).should == ["sounds/19.ul", "sounds/mon-10.ul", "sounds/20.ul", "sounds/19.ul", "sounds/at.ul", "sounds/5.ul", "sounds/19.ul"]
     end
 
     it "returns the correct sounds for a dMY format" do
