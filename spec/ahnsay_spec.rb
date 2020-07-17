@@ -5,7 +5,7 @@ describe Ahnsay do
 
   describe "sounds_for_time" do
     before :each do
-      Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+      Adhearsion.stub_chain("config.core.type").and_return(:foo)
       Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
     end
     let(:time) { Time.new(2012, 11, 10, 4, 15, 22) }
@@ -35,7 +35,7 @@ describe Ahnsay do
 
   describe "sounds_for_digits" do
     before :each do
-      Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+      Adhearsion.stub_chain("config.core.type").and_return(:foo)
       Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
     end
     let(:number) { "4041" }
@@ -47,7 +47,7 @@ describe Ahnsay do
   
   context "TTS support methods" do
     before :each do
-      Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+      Adhearsion.stub_chain("config.core.type").and_return(:foo)
       Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
     end
     describe "#file_for_day" do
@@ -191,7 +191,7 @@ describe Ahnsay do
     describe "#sound_path" do
       let(:sound_file) { "beep.ul" }
       it "returns the proper path" do
-        Adhearsion.stub_chain("config.punchblock.platform").and_return(:foo)
+        Adhearsion.stub_chain("config.core.type").and_return(:foo)
         Adhearsion.stub_chain("config.ahnsay.sounds_dir").and_return("sounds")
         subject.sound_path(sound_file).should == File.join(Adhearsion.config.ahnsay.sounds_dir, sound_file)
       end
@@ -200,7 +200,7 @@ describe Ahnsay do
     describe "#multi_path" do
       let(:path) { "/my/sounds/hello.wav" }
       before :each do
-        Adhearsion.stub_chain("config.punchblock.platform").and_return(platform)
+        Adhearsion.stub_chain("config.core.type").and_return(platform)
       end
       context "on Asterisk" do
         let(:platform) { :asterisk }

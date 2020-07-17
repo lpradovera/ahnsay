@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency %q<adhearsion>, ["~> 2.1"]
+  s.add_runtime_dependency %q<adhearsion>, ["~> 3.0.0.rc1"]
   s.add_runtime_dependency %q<activesupport>, [">= 3.0.10"]
 
   s.add_development_dependency %q<bundler>, ["~> 1.0"]
